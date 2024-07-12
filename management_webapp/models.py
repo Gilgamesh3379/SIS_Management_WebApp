@@ -1,31 +1,30 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
 
 class UserProfile(models.Model):
-    name = models.CharField(max_length =100)
+    name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.name + " - " + self.user.username
 
-class CoursePrograms(models.Model):
+
+class CourseProgram(models.Model):  # Rename to singular for consistency
     text = models.TextField()
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.text + "-" + self.user.username
+        return self.text
+
 
 class Tuition(models.Model):
     text = models.TextField()
-    course_program = models.ForeignKey(CoursePrograms, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    course_program = models.ForeignKey(CourseProgram, on_delete=models.CASCADE)  # Link to the correct model
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.text + "-" + self.user.username
+        return self.text
