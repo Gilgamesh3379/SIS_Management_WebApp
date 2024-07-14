@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from management_webapp.models import CourseProgram, Tuition  # Use singular CourseProgram
+from management_webapp.models import CourseProgram  # Use singular CourseProgram
 
 
 class CourseProgramSerializer(serializers.ModelSerializer):  # Use singular CourseProgramSerializer
@@ -8,7 +8,7 @@ class CourseProgramSerializer(serializers.ModelSerializer):  # Use singular Cour
         fields = ['id', 'text']
 
 
-class TuitionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tuition
-        fields = ['id', 'text']
+# class TuitionSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Tuition
+#         fields = ['id', 'text']
