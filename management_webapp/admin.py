@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from management_webapp.models import UserProfile, CourseProgram, Tuition
+from management_webapp.models import UserProfile, CourseProgram
 
 # Register your models here.
 admin.site.register(UserProfile)
 admin.site.register(CourseProgram)
-admin.site.register(Tuition)
+# admin.site.register(Tuition)
