@@ -8,7 +8,7 @@ class UserProfile(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name + " - " + self.user.username
+        return self.name
 
 
 class CourseProgram(models.Model):  # Rename to singular for consistency
