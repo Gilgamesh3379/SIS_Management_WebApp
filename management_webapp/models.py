@@ -1,30 +1,42 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-
-# class UserProfile(models.Model):
-#     name = models.CharField(max_length=100)
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#
-#     def __str__(self):
-#         return self.name
-
-
-class CourseProgram(models.Model):  # Rename to singular for consistency
-    text = models.TextField()
+class CourseProgram(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    duration = models.IntegerField(default=6)
+    tuition_fee = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.text
+        return self.name
 
+class StudentProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='student_profile')
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=15)
+    courses = models.ManyToManyField(CourseProgram, related_name='students')
+    marks = models.IntegerField(default=0)
+    address = models.CharField(max_length=100)
+    mother_name = models.CharField(max_length=100)
+    father_name = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-# class Tuition(models.Model):
-#     text = models.TextField()
-#     course_program = models.ForeignKey(CourseProgram, on_delete=models.CASCADE)  # Link to the correct model
-#     created_at = models.DateTimeField(auto_now_add=True)
-#     updated_at = models.DateTimeField(auto_now=True)
-#
-#     def __str__(self):
-#         return self.text
+    def __str__(self):
+        return self.name
+
+class LecturerProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='lecturer_profile')
+    name = models.CharField(max_length=100)
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=15)
+    program = models.ForeignKey(CourseProgram, on_delete=models.CASCADE, related_name='lecturers')
+    address = models.CharField(max_length=100)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
