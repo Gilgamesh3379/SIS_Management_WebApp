@@ -1,7 +1,12 @@
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from management_webapp.viewsets import CourseProgramViewSet  # Import viewsets correctly
+from .viewsets import CourseProgramViewSet, StudentProfileViewSet, LecturerProfileViewSet
 
 router = DefaultRouter()
-router.register('courseprograms', CourseProgramViewSet, basename='courseprograms')  # Use the correct viewsets
-# router.register('tuition', TuitionViewSet, basename='tuition')
-urlpatterns = router.urls
+router.register('courseprograms', CourseProgramViewSet)
+router.register('studentprofiles', StudentProfileViewSet)
+router.register('lecturerprofiles', LecturerProfileViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'management_webapp',
     'corsheaders',
     'rest_framework.authtoken',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -143,11 +144,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  # Add this line
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
-    ]
+    ],
 }
 
 CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
@@ -159,11 +161,17 @@ CORS_ALLOW_HEADERS = [
     'authorization',
 ]
 
+# # CORS settings
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+#     'https://sis-management-web-app.vercel.app',
+# ]
+
 # CORS_ALLOWED_ORIGINS = [
 #
 #     'http://localhost:3000',
 # ] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    'http://localhost:3000', 'https://*.vercel.app'
+    'http://localhost:3000', 'https://sis-management-web-app.vercel.app' #'https://*.vercel.app'
 
 ]
