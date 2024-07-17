@@ -9,13 +9,17 @@
   ],
   "routes": [
     {
-      "src": "/favicon.ico", "dest": "/public/favicon.ico",
+      "src": "/(.*)",
       "dest": "SIS_Management_WebApp/wsgi.py",
       "headers": {
         "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, DELETE, PUT",
-        "Access-Control-Allow-Headers": "Authorization, Content-Type"
+        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, DELETE, PUT"
+
       }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "SIS_Management_WebApp/wsgi.py"
     }
   ]
 }
