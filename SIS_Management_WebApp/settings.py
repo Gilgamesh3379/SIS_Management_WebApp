@@ -72,7 +72,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'SIS_Management_WebApp.wsgi.application'
+# WSGI_APPLICATION = 'SIS_Management_WebApp.wsgi.application'
+
+WSGI_APP = 'SIS_Management_WebApp.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
