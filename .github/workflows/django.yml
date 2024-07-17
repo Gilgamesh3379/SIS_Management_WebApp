@@ -27,4 +27,6 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python manage.py test --keepdb
+        python manage.py test --keepdb 
+
+# --keepdb added
