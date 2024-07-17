@@ -9,7 +9,7 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/favicon.ico", "dest": "/public/favicon.ico",
       "dest": "SIS_Management_WebApp/wsgi.py",
       "headers": {
         "Access-Control-Allow-Origin": "*",
