@@ -24,16 +24,16 @@ class CourseProgramSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'duration', 'tuition_fee']
 
 class StudentProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    courses = CourseProgramSerializer(many=True, read_only=True)
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    courses = serializers.PrimaryKeyRelatedField(queryset=CourseProgram.objects.all(), many=True)
 
     class Meta:
         model = StudentProfile
         fields = ['id', 'user', 'name', 'email', 'phone', 'courses', 'marks', 'address', 'created_at', 'updated_at']
 
 class LecturerProfileSerializer(serializers.ModelSerializer):
-    user = UserSerializer()
-    program = CourseProgramSerializer(read_only=True)
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+    program = serializers.PrimaryKeyRelatedField(queryset=CourseProgram.objects.all())
 
     class Meta:
         model = LecturerProfile

@@ -1,7 +1,7 @@
 from rest_framework import generics, serializers
 from rest_framework.permissions import AllowAny
 from django.contrib.auth.models import User
-from .models import StudentProfile, LecturerProfile
+from .models import StudentProfile, LecturerProfile, CourseProgram
 from .serializers import UserSerializer, StudentProfileSerializer, LecturerProfileSerializer
 
 class UserCreate(generics.CreateAPIView):
@@ -15,30 +15,33 @@ class UserCreate(generics.CreateAPIView):
         profile_data = self.request.data
 
         if profile_type == 'student':
-            student_serializer = StudentProfileSerializer(data={
+            student_data = {
                 'user': user.id,
                 'name': profile_data.get('name'),
                 'email': profile_data.get('email'),
                 'phone': profile_data.get('phone'),
                 'address': profile_data.get('address'),
                 'marks': profile_data.get('marks', 0),
-            })
+                'courses': profile_data.get('courses', [])
+            }
+            student_serializer = StudentProfileSerializer(data=student_data)
             if student_serializer.is_valid():
-                student_serializer.save(user=user)
+                student_serializer.save()
             else:
                 user.delete()
                 raise serializers.ValidationError(student_serializer.errors)
         elif profile_type == 'lecturer':
-            lecturer_serializer = LecturerProfileSerializer(data={
+            lecturer_data = {
                 'user': user.id,
                 'name': profile_data.get('name'),
                 'email': profile_data.get('email'),
                 'phone': profile_data.get('phone'),
                 'address': profile_data.get('address'),
                 'program': profile_data.get('program')
-            })
+            }
+            lecturer_serializer = LecturerProfileSerializer(data=lecturer_data)
             if lecturer_serializer.is_valid():
-                lecturer_serializer.save(user=user)
+                lecturer_serializer.save()
             else:
                 user.delete()
                 raise serializers.ValidationError(lecturer_serializer.errors)
